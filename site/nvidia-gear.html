@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nebius Account — NVIDIA Gear</title>
+  <link rel="icon" type="image/png" href="assets/images/PAN-Color.png" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=1" />
+</head>
+<body>
+  <nav>
+    <img src="assets/images/PAN-Color.png" alt="Palo Alto Networks" class="logo" />
+    <a class="site-title" href="index.html">Nebius Account</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="us-strategy.html">US Strategy</a>
+      <a href="architecture.html">Architecture</a>
+      <a href="positioning.html">Firewall Positioning</a>
+      <a href="resources.html">Resources</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page-header">
+      <h1>NVIDIA Gear</h1>
+      <p>What Nebius runs, where it runs, and the bandwidth numbers that size the firewalls.</p>
+    </div>
+
+    <div class="banner">
+      <span class="tag tag-confirmed">Confirmed</span> stated on a Nebius-owned page or filing &nbsp;
+      <span class="tag tag-reported">Reported</span> third-party or secondhand source &nbsp;
+      <span class="tag tag-inferred">Inferred</span> our reading, verify in discovery
+    </div>
+
+    <p class="section-label">GPU platforms (public cloud)</p>
+    <div class="card table-wrap" style="padding:8px 8px;margin-bottom:16px;">
+      <table class="scoreboard-table">
+        <thead>
+          <tr><th>GPU</th><th>US regions</th><th>GPU fabric (east-west)</th><th>VPC NIC (north-south)</th><th>Host CPU</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>B300 SXM (Blackwell Ultra)<br /><span class="note">288 GB HBM3e</span></td>
+            <td><code>us-north1</code> (Woodbury, MN)<br /><span class="note">also UK and France</span></td>
+            <td>InfiniBand, <strong>800 Gbps per GPU</strong> (8&times; ConnectX-8) = 6.4 Tb/s per node</td>
+            <td><strong>BlueField-3, 400 Gbps</strong></td>
+            <td>Xeon 6776P (Granite Rapids)</td>
+          </tr>
+          <tr>
+            <td>B200 SXM (Blackwell)<br /><span class="note">180 GB HBM3e</span></td>
+            <td><code>us-central1</code> (Kansas City)<br /><span class="note">also Israel</span></td>
+            <td>InfiniBand, 400 Gbps per GPU (8&times; ConnectX-7) = 3.2 Tb/s per node</td>
+            <td><strong>BlueField-3, 400 Gbps</strong></td>
+            <td>Xeon Platinum 8580</td>
+          </tr>
+          <tr>
+            <td>H200 SXM (Hopper)<br /><span class="note">141 GB HBM3e</span></td>
+            <td><code>us-central1</code> (Kansas City)<br /><span class="note">also Finland, France, Iceland</span></td>
+            <td>InfiniBand, 400 Gbps per GPU (8&times; ConnectX-7) = 3.2 Tb/s per node</td>
+            <td>BlueField-3, 200 Gbps</td>
+            <td>Xeon Platinum 8468</td>
+          </tr>
+          <tr>
+            <td>RTX PRO 6000 Server Edition<br /><span class="note">96 GB GDDR7, PCIe</span></td>
+            <td><code>us-central1</code> (Kansas City)</td>
+            <td>None (no InfiniBand)</td>
+            <td><strong>BlueField-3, 400 Gbps</strong></td>
+            <td>Xeon 6776P</td>
+          </tr>
+          <tr>
+            <td>H100 SXM / L40S</td>
+            <td>None (Finland only)</td>
+            <td>H100: InfiniBand 400 Gbps per GPU. L40S: none.</td>
+            <td>H100: ConnectX-6, 100 Gbps</td>
+            <td>Xeon 8468 / Gold 6338, EPYC 9654</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="margin-bottom:40px;"><span class="tag tag-confirmed">Confirmed</span> <a class="src" href="https://docs.nebius.com/compute/virtual-machines/types" target="_blank" rel="noopener">VM types</a> <a class="src" href="https://docs.nebius.com/overview/regions" target="_blank" rel="noopener">regions</a>. GPU nodes are 8-GPU VMs. Only H100, H200, B200 and B300 presets can join GPU clusters.</p>
+
+    <p class="section-label">Rack-scale and next-gen</p>
+    <div class="card table-wrap" style="padding:8px 8px;margin-bottom:40px;">
+      <table class="scoreboard-table">
+        <thead>
+          <tr><th>System</th><th>Where / for whom</th><th>Notes</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>GB300 NVL72</td>
+            <td>Large dedicated deployments</td>
+            <td>Nebius earned NVIDIA <strong>Exemplar Cloud</strong> status on GB300 NVL72 for training in Q1 2026, "across multiple GPU generations".</td>
+            <td><span class="tag tag-confirmed">Confirmed</span> <a class="src" href="https://assets.nebius.com/assets/aa1bc2e6-df83-40cd-a6a2-95e7cda3d16c/Nebius%20SHL_Q1%202026.pdf" target="_blank" rel="noopener">Q1 letter</a></td>
+          </tr>
+          <tr>
+            <td>GB200 NVL72</td>
+            <td>Existing fleet</td>
+            <td>Vera Rubin capacity will sit alongside the existing GB200 and GB300 NVL72 capacity.</td>
+            <td><span class="tag tag-reported">Reported</span> <a class="src" href="https://www.itiger.com/news/2601909668" target="_blank" rel="noopener">iTiger</a></td>
+          </tr>
+          <tr>
+            <td><strong>Vera Rubin NVL72</strong></td>
+            <td>US and EU data centers from H2 2026. <strong>Meta's $12B dedicated capacity</strong> is "one of the first large-scale" Vera Rubin deployments, delivering from early 2027.</td>
+            <td>First NVL72 systems were received in Q2 2026 to validate compute, networking and orchestration together. Nebius is already engaging customers about Vera Rubin access.</td>
+            <td><span class="tag tag-confirmed">Confirmed</span> <a class="src" href="https://nebius.com/newsroom/nebius-signs-new-ai-infrastructure-agreement-with-meta" target="_blank" rel="noopener">Meta</a> <a class="src" href="https://assets.nebius.com/assets/4462517b-ce83-41f2-96ed-f2ac1bc06a05/SHLQ226%20(1).pdf-0" target="_blank" rel="noopener">Q2 letter</a></td>
+          </tr>
+          <tr>
+            <td>Vera Rubin platform networking</td>
+            <td>Comes with the systems above</td>
+            <td>NVIDIA's platform pairs Rubin with <strong>BlueField-4</strong> DPUs and <strong>ConnectX-9</strong> SuperNICs. BlueField-4 is the NVIDIA-supported place for in-line security services, so expect Nebius's VPC NIC to move from BF-3 to BF-4.</td>
+            <td><span class="tag tag-inferred">Inferred</span> from NVIDIA platform spec</td>
+          </tr>
+          <tr>
+            <td>NVIDIA Vera CPU</td>
+            <td>Agentic and tool-calling workloads</td>
+            <td>"Early adoption of NVIDIA Vera CPUs" adds general-purpose CPU compute alongside the GPU fleet.</td>
+            <td><span class="tag tag-confirmed">Confirmed</span> <a class="src" href="https://assets.nebius.com/assets/4462517b-ce83-41f2-96ed-f2ac1bc06a05/SHLQ226%20(1).pdf-0" target="_blank" rel="noopener">Q2 letter</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="two-col" style="margin-bottom:40px;">
+      <div class="card">
+        <h2>InfiniBand fabric</h2>
+        <div class="prose">
+          <ul>
+            <li><strong>Three-tier topology:</strong> a fabric root switch, then a <em>POD</em> (set of racks, joined by core switches), then a <em>scalable unit</em> (set of servers, joined by leaf switches). Topology-aware scheduling improves NCCL AllReduce by up to 20%. <a class="src" href="https://docs.nebius.com/compute/clusters/gpu/topology" target="_blank" rel="noopener">docs</a></li>
+            <li><strong>Tenant isolation:</strong> each GPU cluster gets a unique <strong>InfiniBand P-Key</strong> inside a <em>shared</em> physical fabric. Clusters on the same fabric cannot talk over IB. <a class="src" href="https://docs.nebius.com/compute/clusters/gpu" target="_blank" rel="noopener">docs</a></li>
+            <li><strong>US fabrics:</strong> <code>us-central1-a</code> (H200), <code>us-central1-b</code> (B200), <code>us-north1-a</code> (B300). The new owned AI factories are not listed yet. <span class="tag tag-confirmed">Confirmed</span></li>
+            <li>The GPU fabric uses GPUDirect RDMA, with no CPU in the path. <strong>Nothing from PANW goes here.</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Numbers that size the edge</h2>
+        <div class="prose">
+          <ul>
+            <li>Every Blackwell VM has a <strong>400 Gbps BlueField-3</strong> NIC on the VPC, carrying storage, internet and service traffic. H200 has 200 Gbps.</li>
+            <li>Summing those NICs overstates internet demand by orders of magnitude, because most VPC traffic is storage and east-west service traffic. Size the perimeter from <strong>DIA, peering and interconnect capacity per site</strong>, which is a discovery question. <span class="tag tag-inferred">Inferred</span></li>
+            <li>Nebius already owns a BlueField-3 in every GPU host as its VPC data plane. Any DPU-hosted security, such as Prisma AIRS on BlueField, is a <strong>platform conversation with Nebius</strong> and not something a tenant can add. <span class="tag tag-inferred">Inferred</span></li>
+            <li>Gigawatt campuses mean tens of thousands of GPU nodes per site. Even with a modest share of traffic going north-south, the edge needs <strong>terabit-class</strong> inspection. <span class="tag tag-inferred">Inferred</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Internal — Palo Alto Networks account research. Not for customer distribution.
+  </footer>
+</body>
+</html>

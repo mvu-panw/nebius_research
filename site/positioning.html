@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nebius Account — Firewall Positioning</title>
+  <link rel="icon" type="image/png" href="assets/images/PAN-Color.png" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=1" />
+</head>
+<body>
+  <nav>
+    <img src="assets/images/PAN-Color.png" alt="Palo Alto Networks" class="logo" />
+    <a class="site-title" href="index.html">Nebius Account</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="us-strategy.html">US Strategy</a>
+      <a href="architecture.html">Architecture</a>
+      <a href="nvidia-gear.html">NVIDIA Gear</a>
+      <a href="resources.html">Resources</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page-header">
+      <h1>Firewall Positioning</h1>
+      <p>Performance first: line-rate threat prevention on every north-south link at each new US AI factory, with nothing in the GPU fabric.</p>
+    </div>
+
+    <div class="banner">
+      <strong>Incumbent: mixed, with Palo Alto named first.</strong> Nebius's open <a class="src" href="https://careers.nebius.com/?gh_jid=4971845101" target="_blank" rel="noopener">Network Security Engineer</a> role (October 2026) asks for hands-on NGFW experience with "Palo Alto Networks, Check Point, or similar", User-ID, Entra ID and Okta integration, ZTNA and SASE, and management through "<strong>Panorama, Strata Cloud Manager</strong>, and FortiManager". It also covers "large hyper scale DC security solutions: IPS/NDR, AntiDDoS". So PAN-OS is likely already in the estate somewhere, and the open question is who sets the standard for the <strong>new owned US campuses</strong>. <span class="tag tag-inferred">Inferred</span>
+    </div>
+
+    <p class="section-label">Recommendation by enforcement point</p>
+    <div class="card table-wrap" style="padding:8px 8px;margin-bottom:16px;">
+      <table class="scoreboard-table">
+        <thead>
+          <tr><th>Enforcement point</th><th>Recommend</th><th>Key numbers</th><th>Why</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>AI factory internet edge<br /><span class="note">owned campuses: Independence MO, Schuylkill PA, Birmingham AL</span></td>
+            <td><strong>PA-7500</strong> chassis, HA, one or more per campus</td>
+            <td>1,440 Gbps threat prevention and 1,500 Gbps FW per full system. 250 Gbps TP per DPC-A card. 8&times; QSFP-DD 400/100/40G per NPC.</td>
+            <td>The 260 MW to 1.2 GW campuses come online from 2027. Terabit-class inspection at one logical point, scaled by adding cards as power phases come up (PA: 260 MW, then 660 MW, then 1 GW+). Use vsys and zones to separate the public cloud, dedicated hyperscaler blocks and Token Factory.</td>
+          </tr>
+          <tr>
+            <td>Dedicated customer blocks<br /><span class="note">Meta Vera Rubin capacity, Microsoft (Vineland), Q2's four $1B+ deals</span></td>
+            <td><strong>PA-5580</strong> HA pair per block<br /><span class="note">PA-5570 or PA-5560 for smaller blocks</span></td>
+            <td>Threat prevention (appmix, PAN-OS 12.1): 5560 180 / 5570 240 / <strong>5580 300 Gbps</strong>. FW 375 Gbps. <span class="tag tag-reported">400G QSFP-DD ports</span></td>
+            <td>A dedicated block gets a dedicated, auditable edge with its own policy and logs. That is what investment-grade customers will ask Nebius to prove. It also keeps one tenant's DDoS or incident off the shared edge.</td>
+          </tr>
+          <tr>
+            <td>Tenant VPC edge (cloud product)<br /><span class="note">customer-deployed, inside Nebius VPCs</span></td>
+            <td><strong>VM-Series / Prisma AIRS</strong> as an appliance via custom route tables</td>
+            <td>Software. Scale out behind Nebius load balancers.</td>
+            <td>Nebius's own controls are L3/L4 <a href="https://docs.nebius.com/vpc/security-groups/overview" target="_blank" rel="noopener">security groups</a> (GA February 2026). Site-to-site VPN is a DIY open-source <a href="https://docs.nebius.com/vpc/nebius-vpn-gateway" target="_blank" rel="noopener">VM-based IPsec gateway</a> (March 2026). Custom <a href="https://docs.nebius.com/vpc/routing/overview" target="_blank" rel="noopener">route tables</a> already support NAT-gateway-style appliance insertion, but only for egress and cross-network traffic: traffic inside one network always routes directly and can't be steered. Segment tenants into separate networks to inspect between them. Today this is a marketplace image for Nebius's enterprise buyers. Longer term it could become a Nebius-branded security tier.</td>
+          </tr>
+          <tr>
+            <td>Management firewall<br /><span class="note">BMC, BlueField, switch and PDU mgmt</span></td>
+            <td><strong>PA-3440</strong> per hall or site</td>
+            <td>30.2 Gbps FW (appmix). TP figures in sources range from 11 to 18.8 Gbps.</td>
+            <td>Low bandwidth, high consequence. Nebius runs a BlueField-3 in every GPU host as its VPC data plane. Owning the DPU management plane means owning every tenant. App-ID on IPMI, Redfish and SSH, plus User-ID for Nebius operators.</td>
+          </tr>
+          <tr>
+            <td>Facility OT<br /><span class="note">BMS, switchgear, Bloom fuel cells, cooling</span></td>
+            <td><strong>OT Security</strong> plus rugged NGFW at the OT/IT boundary</td>
+            <td>&mdash;</td>
+            <td>On owned campuses Nebius owns the plant. Vineland runs on-site Bloom fuel cells, and there is a company-wide Bloom deal from May 2026. Power availability is the binding constraint on revenue, so an OT incident is a revenue incident. <span class="tag tag-inferred">Inferred</span></td>
+          </tr>
+          <tr>
+            <td>Out-of-band</td>
+            <td><strong>PA-415-5G</strong></td>
+            <td>1.5 Gbps FW, 0.8 Gbps TP, integrated 5G</td>
+            <td>One box per site for cellular OOB instead of a firewall plus a separate modem.</td>
+          </tr>
+          <tr>
+            <td>Corporate and ops access<br /><span class="note">1,500+ staff, field DC techs at 7 US sites</span></td>
+            <td><strong>Prisma Access</strong> (ZTNA 2.0) + Strata Cloud Manager</td>
+            <td>&mdash;</td>
+            <td>The job posting explicitly asks for ZTNA and SASE integrations with Entra ID and Okta. Field technicians and contractors at new sites need least-privilege access to DC management, not a flat VPN.</td>
+          </tr>
+          <tr>
+            <td>SOC / visibility</td>
+            <td><strong>Cortex XSIAM</strong> + NVIDIA DOCA Argus</td>
+            <td>&mdash;</td>
+            <td>Today's SOC postings (Israel and Europe) list Splunk, Microsoft Sentinel and CrowdStrike. Lead with DC telemetry: DPU-level workload data from BlueField into XSIAM, which is the joint PANW + NVIDIA AI Factory story. CrowdStrike is a Nebius <em>customer-facing</em> partner (Falcon in Nebius AI Cloud), so position XSIAM as complementary. <span class="tag tag-inferred">Inferred</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="margin-bottom:40px;">Sources: <a class="src" href="https://cdn.blueally.com/paloguard/datasheets/pa-5500-series.pdf" target="_blank" rel="noopener">PA-5500 datasheet (mirror)</a> &middot; <a class="src" href="https://www.corporatearmor.com/wp-content/uploads/2025/05/pa-7500-ds.pdf" target="_blank" rel="noopener">PA-7500 datasheet (mirror)</a> &middot; <a class="src" href="https://www.paloaltonetworks.com/resources/datasheets/pa-3400-series" target="_blank" rel="noopener">PA-3400 datasheet</a> &middot; <a class="src" href="https://www.paloaltonetworks.com/blog/2026/01/support-nvidia-enterprise-ai-factory/" target="_blank" rel="noopener">PANW + NVIDIA AI Factory</a>. These are the same datasheet figures used for the Lambda account. Several come from reseller-hosted PDFs, so confirm them against official PANW datasheets before quoting to the customer.</p>
+
+    <p class="section-label">Why not the alternatives</p>
+    <div class="two-col" style="margin-bottom:40px;">
+      <div class="card">
+        <h2>Prisma AIRS on BlueField</h2>
+        <div class="prose">
+          <p>Nebius already uses BlueField-3 as the VPC NIC in every Blackwell host, so the DPU is <strong>Nebius's data plane</strong> and not a free slot. AIRS on BlueField is designed for roughly 1&ndash;5 Gbps per DPU, which fits inference endpoints (Token Factory) and not training. Treat it as a <strong>platform roadmap conversation for Vera Rubin and BlueField-4</strong>, not a near-term sale.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Anything in the GPU fabric</h2>
+        <div class="prose">
+          <p>Nebius isolates GPU clusters on shared InfiniBand fabrics with P-Keys and runs GPUDirect RDMA at 3.2&ndash;6.4 Tb/s per node. Nothing inline belongs there. Say this first, unprompted. It shows we understand AI infrastructure and keeps the conversation on north-south, where we win.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="section-label">Talk track</p>
+    <div class="stack">
+      <div class="card">
+        <h2>Gigawatt-scale, performance-first narrative</h2>
+        <div class="prose">
+          <ol>
+            <li><strong>"We never touch your GPU fabric."</strong> Every enforcement point is north-south. P-Key isolation and RDMA stay exactly as designed.</li>
+            <li><strong>"Your edge grows in phases, and so does ours."</strong> Pennsylvania goes from 260 MW to 660 MW to 1 GW+ over 2027&ndash;2029. A PA-7500 adds threat-prevention capacity card by card, so there's no forklift upgrade in each phase.</li>
+            <li><strong>"Prove isolation to the customers who are financing you."</strong> Microsoft and Meta commitments back Nebius's secured debt ($775M in July, $3.5B Citi in October). A dedicated, logged NGFW edge per block is evidence those buyers recognize.</li>
+            <li><strong>"One OS from campus edge to field laptop."</strong> PA-7500, PA-5500, PA-3400, PA-415-5G and Prisma Access all run under Strata Cloud Manager. Nebius is already hiring for that skillset.</li>
+            <li><strong>"Sell security, don't just buy it."</strong> Nebius's VPC security is L3/L4 security groups and a DIY IPsec VM. VM-Series in the marketplace, and later a managed tier, helps Nebius win regulated enterprise and sovereign (Palantir) workloads.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h2>Objection handling</h2>
+          <div class="prose">
+            <ul>
+              <li><strong>"Firewalls slow down training."</strong> Agreed, which is why none go in the training path. We size only the internet, peering and interconnect edge, at line rate with threat prevention on.</li>
+              <li><strong>"We already standardized on Check Point / Fortinet."</strong> The job post lists Palo Alto first and asks for Panorama and SCM, so the skills are already in-house. The new owned US campuses are greenfield, so they are the natural point to standardize on a security-on throughput number rather than a firewall-only number.</li>
+              <li><strong>"Last time we added firewalls, us-central1 went down."</strong> This is true, and it's public: on September 3, 2025, "new Firewall nodes onboarding" between Nebius's Backbone and DC routing domains triggered a 1h45m routing loop (<a href="https://nebius.com/blog/posts/incident-post-mortem-analysis-us-central1-service-disruption" target="_blank" rel="noopener">post-mortem</a>). Raise it before they do. Lead with an insertion design that keeps the firewall out of route recomputation (vwire/L2, or a tightly scoped BGP role), staged validation, and HA that fails without perturbing routing. Bring a PANW DC architect. <span class="tag tag-inferred">Inferred</span></li>
+              <li><strong>"Hyperscaler customers bring their own security."</strong> Inside their tenancy, yes. The facility edge, management plane and OT remain Nebius's responsibility and Nebius's liability.</li>
+              <li><strong>"We're moving too fast to redesign."</strong> Nebius plans to deploy more than 1 GW a year from 2027, using reference designs that are also handed to asset-light partners. Get PANW into the <em>reference design</em> once and it replicates to every owned and partner site.</li>
+              <li><strong>"Sovereign deals need something different."</strong> Palantir's "inside the perimeter" partnership and possible US government work point to on-prem PA-Series under Panorama with offline updates. Bring in the PANW federal team. Nebius's trust center does not list FedRAMP.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Discovery questions</h2>
+          <div class="prose">
+            <ol>
+              <li>Which NGFW platforms run today in the data centers versus the corporate network? Where are Panorama and SCM used?</li>
+              <li>Which firewall nodes were being onboarded at the Backbone/DC boundary in us-central1 in September 2025 (vendor, mode, routing role)? What changed in the insertion design afterwards?</li>
+              <li>Who owns the network reference design for Independence, Pennsylvania and Birmingham, and when is it frozen for the 2027 go-lives?</li>
+              <li>What internet, peering and interconnect capacity is planned per campus (N&times;400G)? Is there a separate edge per dedicated customer block?</li>
+              <li>What do Microsoft and Meta require contractually for edge security, logging and isolation evidence?</li>
+              <li>How are BMC, BlueField and switch management networks segmented and monitored today?</li>
+              <li>Who secures the Bloom fuel cells and BMS networks: Nebius, the vendor or the landlord (DataOne at Vineland)?</li>
+              <li>Is there demand from enterprise or sovereign customers for an NGFW or IPS service inside Nebius VPCs beyond security groups?</li>
+              <li>Will the asset-light partner reference design specify the security stack, or leave it to each partner?</li>
+              <li>What is the plan for BlueField-4 on Vera Rubin? Will Nebius run third-party services on the DPU?</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Internal — Palo Alto Networks account research. Not for customer distribution.
+  </footer>
+</body>
+</html>

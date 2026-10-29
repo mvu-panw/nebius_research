@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nebius Account — Architecture</title>
+  <link rel="icon" type="image/png" href="assets/images/PAN-Color.png" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=1" />
+</head>
+<body>
+  <nav>
+    <img src="assets/images/PAN-Color.png" alt="Palo Alto Networks" class="logo" />
+    <a class="site-title" href="index.html">Nebius Account</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="us-strategy.html">US Strategy</a>
+      <a href="nvidia-gear.html">NVIDIA Gear</a>
+      <a href="positioning.html">Firewall Positioning</a>
+      <a href="resources.html">Resources</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page-header">
+      <h1>Architecture</h1>
+      <p>How Nebius's network is layered, built from the docs, the blog and a public post-mortem. There are no customer-supplied diagrams yet.</p>
+    </div>
+
+    <div class="banner">
+      <span class="tag tag-confirmed">Confirmed</span> stated on a Nebius-owned page or filing &nbsp;
+      <span class="tag tag-reported">Reported</span> third-party or secondhand source &nbsp;
+      <span class="tag tag-inferred">Inferred</span> our reading, verify in discovery
+    </div>
+
+    <p class="section-label">Layered view, with PANW enforcement points</p>
+    <div class="card" style="margin-bottom:16px;padding:20px;">
+      <svg viewBox="0 0 900 560" width="100%" role="img" aria-labelledby="archTitle archDesc" style="display:block;max-width:900px;margin:0 auto;font-family:var(--font);">
+        <title id="archTitle">Nebius network layers</title>
+        <desc id="archDesc">Internet, peering and customer sites connect to the Nebius backbone domain. The backbone links to each site's data center domain through firewall nodes. Inside a site sit the VPC data plane on BlueField-3, the InfiniBand GPU fabric, the management network, and facility OT. PANW enforcement points are the campus edge, dedicated-block edges, the tenant VPC, management, OT and out-of-band. The GPU fabric is excluded.</desc>
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9EA0A8"/></marker>
+        </defs>
+        <g font-size="13" fill="#FFFFFF">
+          <!-- Internet -->
+          <rect x="20" y="16" width="860" height="46" rx="10" fill="#13131F" stroke="#1E1E2E"/>
+          <text x="450" y="44" text-anchor="middle">Internet &middot; peering &middot; Microsoft / Meta interconnects &middot; customer sites (IPsec VPN)</text>
+          <line x1="450" y1="62" x2="450" y2="92" stroke="#9EA0A8" stroke-width="1.5" marker-end="url(#ar)"/>
+          <!-- Backbone -->
+          <rect x="20" y="94" width="860" height="56" rx="10" fill="#13131F" stroke="#00C0E8"/>
+          <text x="40" y="118" font-weight="600" fill="#00C0E8">Backbone network domain</text>
+          <text x="40" y="138" fill="#9EA0A8" font-size="12">inter-DC and inter-region transport (us-central1 control plane leaned on eu-north1)</text>
+          <rect x="700" y="106" width="166" height="32" rx="16" fill="#7B2FBE" fill-opacity="0.35" stroke="#7B2FBE"/>
+          <text x="783" y="127" text-anchor="middle" font-size="12">PA-7500 campus edge</text>
+          <!-- firewall boundary -->
+          <line x1="450" y1="150" x2="450" y2="184" stroke="#9EA0A8" stroke-width="1.5" marker-end="url(#ar)"/>
+          <text x="462" y="172" fill="#9EA0A8" font-size="12">"Firewall nodes" between domains (post-mortem, Sep 2025)</text>
+          <!-- DC domain -->
+          <rect x="20" y="186" width="860" height="356" rx="10" fill="none" stroke="#00C0E8" stroke-dasharray="5 4"/>
+          <text x="40" y="210" font-weight="600" fill="#00C0E8">Data center network domain (per site)</text>
+          <rect x="700" y="196" width="166" height="32" rx="16" fill="#7B2FBE" fill-opacity="0.35" stroke="#7B2FBE"/>
+          <text x="783" y="217" text-anchor="middle" font-size="12">PA-5580 per dedicated block</text>
+          <!-- VPC -->
+          <rect x="40" y="240" width="400" height="140" rx="10" fill="#13131F" stroke="#1E1E2E"/>
+          <text x="56" y="264" font-weight="600">VPC data plane</text>
+          <text x="56" y="286" fill="#9EA0A8" font-size="12">BlueField-3 NIC per host (400G Blackwell, 200G H200)</text>
+          <text x="56" y="305" fill="#9EA0A8" font-size="12">Security groups: L3/L4, stateful, 60 rules per group</text>
+          <text x="56" y="324" fill="#9EA0A8" font-size="12">Default egress gateway (shared NAT pool) or custom NAT VM</text>
+          <text x="56" y="343" fill="#9EA0A8" font-size="12">IPsec VPN Gateway VM &middot; Tunnels (8 Gbps/region)</text>
+          <rect x="56" y="352" width="200" height="22" rx="11" fill="#7B2FBE" fill-opacity="0.35" stroke="#7B2FBE"/>
+          <text x="156" y="367" text-anchor="middle" font-size="11">VM-Series via route tables</text>
+          <!-- GPU fabric -->
+          <rect x="460" y="240" width="400" height="140" rx="10" fill="#13131F" stroke="#1E1E2E"/>
+          <text x="476" y="264" font-weight="600">InfiniBand GPU fabric</text>
+          <text x="476" y="286" fill="#9EA0A8" font-size="12">root switch &#8594; POD (core) &#8594; scalable unit (leaf)</text>
+          <text x="476" y="305" fill="#9EA0A8" font-size="12">400G per GPU (B200/H200), 800G per GPU (B300)</text>
+          <text x="476" y="324" fill="#9EA0A8" font-size="12">shared fabric, P-Key per cluster, GPUDirect RDMA</text>
+          <rect x="476" y="352" width="190" height="22" rx="11" fill="#1E1E2E" stroke="#9EA0A8"/>
+          <text x="571" y="367" text-anchor="middle" font-size="11" fill="#9EA0A8">no inline security here</text>
+          <!-- Mgmt -->
+          <rect x="40" y="396" width="260" height="130" rx="10" fill="#13131F" stroke="#1E1E2E"/>
+          <text x="56" y="420" font-weight="600">Management</text>
+          <text x="56" y="442" fill="#9EA0A8" font-size="12">BMC, BlueField, switch, PDU mgmt</text>
+          <text x="56" y="461" fill="#9EA0A8" font-size="12">Juniper / Arista / Mellanox gear</text>
+          <rect x="56" y="490" width="120" height="22" rx="11" fill="#7B2FBE" fill-opacity="0.35" stroke="#7B2FBE"/>
+          <text x="116" y="505" text-anchor="middle" font-size="11">PA-3440</text>
+          <!-- OT -->
+          <rect x="320" y="396" width="260" height="130" rx="10" fill="#13131F" stroke="#1E1E2E"/>
+          <text x="336" y="420" font-weight="600">Facility OT</text>
+          <text x="336" y="442" fill="#9EA0A8" font-size="12">BMS, switchgear, cooling</text>
+          <text x="336" y="461" fill="#9EA0A8" font-size="12">Bloom fuel cells (Vineland and more)</text>
+          <rect x="336" y="490" width="140" height="22" rx="11" fill="#7B2FBE" fill-opacity="0.35" stroke="#7B2FBE"/>
+          <text x="406" y="505" text-anchor="middle" font-size="11">OT Security</text>
+          <!-- OOB -->
+          <rect x="600" y="396" width="260" height="130" rx="10" fill="#13131F" stroke="#1E1E2E"/>
+          <text x="616" y="420" font-weight="600">Out-of-band &amp; field access</text>
+          <text x="616" y="442" fill="#9EA0A8" font-size="12">cellular OOB per site</text>
+          <text x="616" y="461" fill="#9EA0A8" font-size="12">DC techs at 7 US sites, contractors</text>
+          <rect x="616" y="490" width="220" height="22" rx="11" fill="#7B2FBE" fill-opacity="0.35" stroke="#7B2FBE"/>
+          <text x="726" y="505" text-anchor="middle" font-size="11">PA-415-5G &middot; Prisma Access</text>
+        </g>
+      </svg>
+      <p class="note" style="text-align:center;">Purple pills are proposed PANW enforcement points. The VPC, fabric and backbone/DC details are <span class="tag tag-confirmed">Confirmed</span> from docs and the post-mortem. The management, OT and OOB boxes are <span class="tag tag-inferred">Inferred</span> as typical AI-factory design, so verify them in discovery.</p>
+    </div>
+    <div style="margin-bottom:40px;"></div>
+
+    <p class="section-label">US regions and site types</p>
+    <div class="card table-wrap" style="padding:8px 8px;margin-bottom:40px;">
+      <table class="scoreboard-table">
+        <thead>
+          <tr><th>Region / site</th><th>Location</th><th>Site model</th><th>Platforms</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>us-central1</code></td>
+            <td>Kansas City, MO</td>
+            <td>Colo (Patmos)</td>
+            <td>B200, H200, RTX PRO 6000. IB fabrics <code>us-central1-a</code> and <code>-b</code>.</td>
+            <td>Full service set, including Soperator, PostgreSQL, MLflow and Applications. <span class="tag tag-confirmed">Confirmed</span> <a class="src" href="https://docs.nebius.com/overview/regions" target="_blank" rel="noopener">regions</a></td>
+          </tr>
+          <tr>
+            <td><code>us-north1</code></td>
+            <td>Woodbury, MN</td>
+            <td>Not disclosed</td>
+            <td>B300. IB fabric <code>us-north1-a</code>.</td>
+            <td>No Soperator, PostgreSQL or MLflow yet, which suggests a newer, compute-first region. <span class="tag tag-confirmed">Confirmed</span> <a class="src" href="https://docs.nebius.com/overview/regions" target="_blank" rel="noopener">regions</a></td>
+          </tr>
+          <tr>
+            <td>Dedicated capacity</td>
+            <td>Vineland, NJ (Microsoft) and future Meta sites</td>
+            <td>Build-to-suit lease, then owned</td>
+            <td>GB200/GB300 NVL72, then Vera Rubin NVL72</td>
+            <td>Not exposed as public regions. Expect a separate edge per customer block. <span class="tag tag-inferred">Inferred</span></td>
+          </tr>
+          <tr>
+            <td>Owned AI factories</td>
+            <td>Independence MO, Schuylkill PA, Birmingham AL</td>
+            <td>Owned (Nebius runs the full stack)</td>
+            <td>Not disclosed</td>
+            <td>All three expected in 2027. Nebius designs its own servers and racks (<a href="https://nebius.com/blog/posts/designing-hardware-for-hosting-gpus" target="_blank" rel="noopener">blog</a>), and its reference designs are now offered to asset-light partners too. <span class="tag tag-confirmed">Confirmed</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="two-col" style="margin-bottom:40px;">
+      <div class="card">
+        <h2>Backbone and DC domains (the post-mortem)</h2>
+        <div class="prose">
+          <p>On <strong>September 3, 2025</strong>, us-central1 went down for 1h45m. A routing-policy change had created a latent conflict between the <strong>Backbone</strong> and <strong>Data Center</strong> network domains. A later "security infrastructure extension", described as "<strong>new Firewall nodes onboarding</strong>", triggered route recomputation and a persistent routing loop on the inter-facility path. <span class="tag tag-confirmed">Confirmed</span> <a class="src" href="https://nebius.com/blog/posts/incident-post-mortem-analysis-us-central1-service-disruption" target="_blank" rel="noopener">post-mortem</a></p>
+          <ul>
+            <li>Nebius operates <strong>its own backbone</strong>, with firewalls at the boundary between backbone and DC.</li>
+            <li>us-central1 services depended on <strong>eu-north1</strong> (Finland) for the console, tenant registration and quotas, and geo-IP load balancing kept sending users to the broken endpoint.</li>
+            <li>Planned fixes include stricter split-horizon between routing domains, pre-deployment routing simulation, churn alerting, geo-DNS failover and regionalized control planes.</li>
+            <li><strong>Implication:</strong> any firewall proposal will be judged on how it interacts with routing. Make the insertion design the first slide. <span class="tag tag-inferred">Inferred</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <h2>VPC: what tenants get</h2>
+        <div class="prose">
+          <ul>
+            <li>The object model is network &rarr; subnet &rarr; pool &rarr; allocation, plus routing tables and DNS zones. <strong>IPv4 only.</strong> <a class="src" href="https://docs.nebius.com/vpc/overview" target="_blank" rel="noopener">docs</a></li>
+            <li><strong>Security groups</strong> have been GA since February 2026. They are L3/L4 (TCP, UDP, ICMP or any), stateful by default, with up to 60 rules per group, 8 groups per NIC, and up to 8 CIDRs and 8 ports per rule. A default group is always attached. <a class="src" href="https://docs.nebius.com/vpc/security-groups/overview" target="_blank" rel="noopener">docs</a> <a class="src" href="https://docs.nebius.com/vpc/resources/quotas-limits" target="_blank" rel="noopener">limits</a></li>
+            <li><strong>Egress:</strong> the default egress gateway NATs to the VM's public IP or a <em>shared</em> dynamic pool. Projects get 3 public IPv4 addresses by default. <a class="src" href="https://docs.nebius.com/vpc/routing/overview" target="_blank" rel="noopener">docs</a></li>
+            <li><strong>Custom route tables</strong> (since September 2025) let a VM act as a NAT or appliance gateway for chosen subnets. Traffic <em>within</em> a network always routes directly and can't be steered. <a class="src" href="https://docs.nebius.com/vpc/routing/custom-nat-gateway" target="_blank" rel="noopener">docs</a></li>
+            <li><strong>Site-to-site VPN:</strong> an open-source, VM-based IPsec gateway (IKEv2) from Nebius Professional Services, on GitHub, since March 2026. There is no managed VPN. <a class="src" href="https://docs.nebius.com/vpc/nebius-vpn-gateway" target="_blank" rel="noopener">docs</a></li>
+            <li><strong>Tunnels:</strong> expose services through an outbound agent with no inbound ports. Limits are 120 Mbps per tunnel, 600 Mbps per project and 8 Gbps per region. GA in all regions in October 2026. <a class="src" href="https://docs.nebius.com/tunnels" target="_blank" rel="noopener">docs</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-bottom:40px;">
+      <div class="card">
+        <h2>Isolation and platform security</h2>
+        <div class="prose">
+          <ul>
+            <li><strong>GPU fabric:</strong> each GPU cluster gets its own InfiniBand P-Key on a shared physical fabric. <a class="src" href="https://docs.nebius.com/compute/clusters/gpu" target="_blank" rel="noopener">docs</a></li>
+            <li><strong>Tenancy:</strong> tenants, then projects (one per region), with IAM groups and roles. Customers can create their own tenants for separate billing and isolation (since September 2025). <a class="src" href="https://docs.nebius.com/iam/overview" target="_blank" rel="noopener">docs</a></li>
+            <li><strong>Services:</strong> Audit Logs, KMS and SecretStash in every region. Managed Kubernetes control planes can be restricted to allowed CIDRs. <a class="src" href="https://docs.nebius.com/overview/regions" target="_blank" rel="noopener">regions</a></li>
+            <li><strong>Customer workload security:</strong> a CrowdStrike Falcon integration (March 2026). <span class="tag tag-reported">Reported</span></li>
+            <li><strong>No native</strong> L7 inspection, IPS, URL filtering or managed WAF in the VPC docs. <span class="tag tag-inferred">Inferred</span> from the docs crawl</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Nebius's own network team</h2>
+        <div class="prose">
+          <ul>
+            <li><strong>Vendors named in postings:</strong> Juniper, Arista, Huawei and Mellanox (US Senior Network Engineer), plus Cisco and Aruba (EU). <a class="src" href="https://careers.nebius.com/" target="_blank" rel="noopener">careers</a></li>
+            <li><strong>Technologies:</strong> EVPN/VXLAN, BGP, IS-IS, L3VPN/MPLS, multi-VRF segmentation, and IPv6 knowledge.</li>
+            <li><strong>Tooling:</strong> Zabbix, Grafana, Akvorado (flow analytics), NetBox, Ansible and Terraform. Expect them to want an API-first firewall that integrates with Terraform.</li>
+            <li><strong>Security operations:</strong> SOC, DFIR and detection roles in Israel and Europe, using Splunk, Microsoft Sentinel and CrowdStrike.</li>
+            <li>A US <strong>Engineering Manager, Network Infrastructure</strong> role is open. That person will own the US network and is a key contact.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Internal — Palo Alto Networks account research. Not for customer distribution.
+  </footer>
+</body>
+</html>

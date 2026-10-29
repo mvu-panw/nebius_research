@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nebius Account — Home</title>
+  <link rel="icon" type="image/png" href="assets/images/PAN-Color.png" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=1" />
+</head>
+<body>
+  <nav>
+    <img src="assets/images/PAN-Color.png" alt="Palo Alto Networks" class="logo" />
+    <a class="site-title" href="index.html">Nebius Account</a>
+    <div class="nav-links">
+      <a href="us-strategy.html">US Strategy</a>
+      <a href="architecture.html">Architecture</a>
+      <a href="nvidia-gear.html">NVIDIA Gear</a>
+      <a href="positioning.html">Firewall Positioning</a>
+      <a href="resources.html">Resources</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page-header">
+      <h1>Nebius</h1>
+      <p>"The AI cloud company". Account research and PANW positioning for technical enablement.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:32px;">
+      <p style="font-weight:600;font-size:1.15rem;margin-bottom:14px;color:var(--cyan);">The 30-second version</p>
+      <div class="prose">
+        <ul>
+          <li><strong>Who:</strong> a full-stack AI cloud headquartered in Amsterdam and listed on Nasdaq (NBIS). It has 1,500+ staff and R&amp;D hubs in Europe, the UK, North America and Israel. Founder and CEO is Arkady Volozh. It is an NVIDIA Exemplar Cloud on GB300 NVL72, and NVIDIA invested $2B in March 2026. <a class="src" href="https://nebius.com/about" target="_blank" rel="noopener">about</a> <a class="src" href="https://nebius.com/newsroom/nvidia-and-nebius-partner-to-scale-full-stack-ai-cloud" target="_blank" rel="noopener">NVIDIA</a></li>
+          <li><strong>Scale:</strong> Q2 2026 revenue was $582M (up 454% YoY), with AI cloud ARR of <strong>$3.0B</strong> and a 50% adjusted EBITDA margin. Contracted power is heading to <strong>5 GW</strong> by year-end 2026, with more than 1 GW a year deployed from 2027. <a class="src" href="https://assets.nebius.com/assets/4462517b-ce83-41f2-96ed-f2ac1bc06a05/SHLQ226%20(1).pdf-0" target="_blank" rel="noopener">Q2 letter</a></li>
+          <li><strong>The US build-out:</strong> 7 US sites, including two owned <strong>1.2 GW</strong> AI factories (Independence, MO and Schuylkill County, PA) and an owned site in Birmingham, AL, all going live in 2027. Microsoft and Meta contracts are worth roughly $46B combined. <a href="us-strategy.html" class="src">US Strategy &rarr;</a></li>
+          <li><strong>Incumbent:</strong> a mixed NGFW estate. A current Nebius job posting names "Palo Alto Networks, Check Point" and asks for <strong>Panorama and Strata Cloud Manager</strong> (plus FortiManager). Tenant-facing security is L3/L4 security groups plus a DIY IPsec VPN VM. <a class="src" href="https://careers.nebius.com/?gh_jid=4971845101" target="_blank" rel="noopener">job</a></li>
+          <li><strong>Recommendation:</strong> PA-7500 at each owned campus edge, PA-5580 HA per dedicated customer block, PA-3440 for management, PA-415-5G for OOB, OT Security for the power plant and BMS, Prisma Access for field ops, and VM-Series as a tenant marketplace option. Nothing goes in the GPU fabric. <a href="positioning.html" class="src">details &rarr;</a></li>
+          <li><strong>Why now:</strong> reference designs for the 2027 gigawatt campuses are being set now and reused at partner sites. Hyperscaler customers are financing the build and will want isolation evidence. Vera Rubin and BlueField-4 arrive in 2026&ndash;27.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-bottom:40px;">
+      <div class="card">
+        <h2>Offerings</h2>
+        <div class="prose">
+          <ul>
+            <li><strong>AI Cloud ("Aether", now 3.6):</strong> GPU VMs (B300, B200, H200, RTX PRO 6000), InfiniBand GPU clusters, Managed Kubernetes, Soperator (Slurm on K8s), Object Storage, PostgreSQL and MLflow. <a class="src" href="https://docs.nebius.com/overview/regions" target="_blank" rel="noopener">docs</a></li>
+            <li><strong>Token Factory:</strong> production inference on open models (Kimi, GLM, Nemotron). Inference volume more than tripled in Q2 2026. Strengthened by the Eigen AI, Clarifai, Inferize and Tavily deals.</li>
+            <li><strong>Serverless AI</strong> endpoints and <strong>Nebius Tunnels</strong>, which expose services without inbound ports.</li>
+            <li><strong>Deal types:</strong> short-term (3&ndash;6 months, premium), mid-term (1&ndash;3 years, the core) and long-term with investment-grade buyers (Microsoft, Meta).</li>
+            <li><strong>Asset-light partners (July 2026):</strong> partners build to Nebius reference designs, and Nebius supplies the software and go-to-market. <a class="src" href="https://nebius.com/newsroom/nebius-introduces-business-model-to-scale-ai-cloud-globally-through-infrastructure-partnerships" target="_blank" rel="noopener">release</a></li>
+            <li><strong>Trust:</strong> SOC 2 Type II (with HIPAA), SOC 3, ISO 27001/27018/27701/22301/42001, CSA STAR L1, and NIS2/DORA alignment. No FedRAMP listed. <a class="src" href="https://nebius.com/trust-center" target="_blank" rel="noopener">trust</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Business signals</h2>
+        <div class="prose">
+          <ul>
+            <li><strong>Meta:</strong> up to $27B over 5 years ($12B dedicated Vera Rubin capacity from early 2027, plus a $15B backstop), signed March 2026. <a class="src" href="https://nebius.com/newsroom/nebius-signs-new-ai-infrastructure-agreement-with-meta" target="_blank" rel="noopener">release</a></li>
+            <li><strong>Microsoft:</strong> $17.4B, up to $19.4B, from Vineland, NJ. All tranches had been delivered by August 2026. <span class="tag tag-reported">Reported</span> <a class="src" href="https://www.theregister.com/2025/09/09/microsoft_inks_near_20b_deal/" target="_blank" rel="noopener">Register</a></li>
+            <li><strong>Capital:</strong> over $9B in customer prepayments expected in 2026, $8B cash at the end of Q2, a $775M secured facility (July) and a <strong>$3.5B Citi facility</strong> (October 22, 2026). <a class="src" href="https://nebius.com/newsroom/nebius-secures-3-5-billion-financing-facility-with-citi" target="_blank" rel="noopener">release</a></li>
+            <li><strong>Americas leadership:</strong> Dan Lawrence, SVP and GM Americas (ex-Akamai, ex-AWS), since March 2026. <a class="src" href="https://www.businesswire.com/news/home/20260309655149/en/" target="_blank" rel="noopener">release</a></li>
+            <li><strong>Security ecosystem:</strong> CrowdStrike Falcon is integrated into Nebius AI Cloud for customers (March 2026). Palantir names Nebius its preferred sovereign AI infrastructure partner (September 2026). <a class="src" href="https://nebius.com/newsroom/palantir-and-nebius-partner-to-deliver-a-complete-sovereign-ai-stack-to-palantir-customers" target="_blank" rel="noopener">Palantir</a></li>
+            <li><strong>Other holdings:</strong> Avride (autonomous driving, with Uber), Toloka (data, backed by Bezos Expeditions), TripleTen and a ClickHouse stake.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <p class="section-label">Explore</p>
+    <div class="menu-grid">
+      <a href="us-strategy.html" class="menu-card">
+        <div class="card-icon" style="background:none;width:72px;height:72px;">
+          <svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="var(--cyan)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+        </div>
+        <span class="card-label">US Strategy</span>
+        <span class="card-sub">Data center builds, timelines, hiring</span>
+      </a>
+
+      <a href="architecture.html" class="menu-card">
+        <div class="card-icon" style="background:none;width:72px;height:72px;">
+          <img src="assets/images/Strata-Hybrid-dark.png" alt="Strata" style="width:100%;height:100%;object-fit:contain;" />
+        </div>
+        <span class="card-label">Architecture</span>
+        <span class="card-sub">Regions, VPC, fabrics, edges</span>
+      </a>
+
+      <a href="nvidia-gear.html" class="menu-card">
+        <div class="card-icon" style="background:none;width:72px;height:72px;">
+          <img src="assets/images/Prisma-AIRS-Hybrid-dark.svg" alt="Prisma AIRS" style="width:100%;height:100%;object-fit:contain;" />
+        </div>
+        <span class="card-label">NVIDIA Gear</span>
+        <span class="card-sub">GPUs, fabrics, DPUs, link speeds</span>
+      </a>
+
+      <a href="positioning.html" class="menu-card">
+        <div class="card-icon" style="background:none;width:72px;height:72px;">
+          <img src="assets/images/PAN-Color.png" alt="Palo Alto Networks" style="width:100%;height:100%;object-fit:contain;" />
+        </div>
+        <span class="card-label">Firewall Positioning</span>
+        <span class="card-sub">Models, talk track, discovery</span>
+      </a>
+
+      <a href="resources.html" class="menu-card">
+        <div class="card-icon" style="background:none;width:72px;height:72px;">
+          <img src="assets/images/Cortex-XSIAM-Hybrid.png" alt="Cortex XSIAM" style="width:100%;height:100%;object-fit:contain;" />
+        </div>
+        <span class="card-label">Resources</span>
+        <span class="card-sub">Docs, blog, newsroom, careers, press</span>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    Internal — Palo Alto Networks account research. Not for customer distribution.
+  </footer>
+</body>
+</html>

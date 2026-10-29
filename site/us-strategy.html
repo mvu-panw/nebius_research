@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nebius Account — US Strategy</title>
+  <link rel="icon" type="image/png" href="assets/images/PAN-Color.png" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=1" />
+</head>
+<body>
+  <nav>
+    <img src="assets/images/PAN-Color.png" alt="Palo Alto Networks" class="logo" />
+    <a class="site-title" href="index.html">Nebius Account</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="architecture.html">Architecture</a>
+      <a href="nvidia-gear.html">NVIDIA Gear</a>
+      <a href="positioning.html">Firewall Positioning</a>
+      <a href="resources.html">Resources</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page-header">
+      <h1>US Strategy</h1>
+      <p>Where Nebius is building in the US, how big and how fast, and who it is hiring to run it. Researched October 29, 2026.</p>
+    </div>
+
+    <div class="banner">
+      <span class="tag tag-confirmed">Confirmed</span> stated on a Nebius-owned page or filing &nbsp;
+      <span class="tag tag-reported">Reported</span> third-party or secondhand source &nbsp;
+      <span class="tag tag-inferred">Inferred</span> our reading, verify in discovery
+    </div>
+
+    <div class="stat-row">
+      <div class="stat"><div class="num">7</div><div class="lbl">US sites on Nebius's own capacity map (Q2 2026 letter)</div></div>
+      <div class="stat"><div class="num">2.4 GW</div><div class="lbl">at two owned gigawatt campuses: Independence, MO and Schuylkill County, PA</div></div>
+      <div class="stat"><div class="num">~$46B</div><div class="lbl">Microsoft (up to $19.4B) + Meta (up to $27B) contracts, both US hyperscalers</div></div>
+      <div class="stat"><div class="num">113</div><div class="lbl">open US roles; 25 tied to a named US data center site (Oct 29, 2026)</div></div>
+    </div>
+
+    <div class="card" style="margin-bottom:32px;">
+      <p style="font-weight:600;font-size:1.15rem;margin-bottom:14px;color:var(--cyan);">The 30-second version</p>
+      <div class="prose">
+        <ul>
+          <li><strong>Shape of the build:</strong> Nebius started in the US with colocation (Kansas City, Nov 2024) and a leased build-to-suit (Vineland, NJ, for Microsoft). In 2026 it moved to <strong>owned gigawatt-scale AI factories</strong> in Missouri, Pennsylvania and Alabama. Owned capacity is now <strong>over 75% of contracted power</strong>. <span class="tag tag-confirmed">Confirmed</span> <a class="src" href="https://assets.nebius.com/assets/aa1bc2e6-df83-40cd-a6a2-95e7cda3d16c/Nebius%20SHL_Q1%202026.pdf" target="_blank" rel="noopener">Q1 letter</a></li>
+          <li><strong>Timing:</strong> the owned US sites are in construction now and expected to be operational in <strong>2027</strong>. Nebius plans to deploy <strong>more than 1 GW per year starting in 2027</strong>, and raised its year-end 2026 contracted power target to <strong>5 GW</strong>. <span class="tag tag-confirmed">Confirmed</span> <a class="src" href="https://assets.nebius.com/assets/4462517b-ce83-41f2-96ed-f2ac1bc06a05/SHLQ226%20(1).pdf-0" target="_blank" rel="noopener">Q2 letter</a></li>
+          <li><strong>Demand:</strong> Microsoft is served from Vineland, and all Microsoft tranches had been delivered by August 2026. Meta's $27B Vera Rubin deal starts delivering in early 2027 "across multiple locations". Other Q2 wins include a US AI neolab and a large US quant trading firm. <span class="tag tag-confirmed">Confirmed</span> <a class="src" href="https://nebius.com/newsroom/nebius-signs-new-ai-infrastructure-agreement-with-meta" target="_blank" rel="noopener">Meta release</a></li>
+          <li><strong>Why it matters for PANW:</strong> every owned campus is a greenfield edge, management and OOB build that Nebius designs and buys itself. A colo landlord doesn't make those calls. Network design for the 2027 sites is being decided now. <span class="tag tag-inferred">Inferred</span> <a href="#panw" class="src">details &darr;</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="section-label">US data centers</p>
+    <div class="card table-wrap" style="padding:8px 8px;margin-bottom:16px;">
+      <table class="scoreboard-table">
+        <thead>
+          <tr><th>Site</th><th>Model / partner</th><th>Capacity</th><th>GPUs / customer</th><th>Status &amp; timeline</th><th>Sources</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Kansas City, MO<br /><span class="note">region <code>us-central1</code></span></td>
+            <td>Colocation. Patmos facility (the former Kansas City Star printing plant). Nebius was its first tenant.</td>
+            <td>5 MW initial, with potential to grow to 40 MW (~35k GPUs)</td>
+            <td>Launched on Hopper H200. The public region now lists B200, H200 and RTX PRO 6000.</td>
+            <td><strong>Live.</strong> Nebius's first US cluster, scheduled for Q1 2025. Phase 2 was agreed in March 2025.</td>
+            <td><span class="tag tag-confirmed">Confirmed</span><br /><a class="src" href="https://nebius.com/newsroom/nebius-expands-in-us-with-first-gpu-cluster-in-kansas-city-offices-in-san-francisco-dallas-and-new-york" target="_blank" rel="noopener">newsroom</a> <a class="src" href="https://docs.nebius.com/overview/regions" target="_blank" rel="noopener">regions</a> <a class="src" href="https://www.datacenterdynamics.com/en/news/nebius-to-deploy-5mw-nvidia-h200-cluster-at-patmos-data-center-in-kansas-city-missouri" target="_blank" rel="noopener">DCD</a></td>
+          </tr>
+          <tr>
+            <td>Vineland, NJ</td>
+            <td>Build-to-suit lease. DataOne builds it to Nebius's spec and Nebius is the tenant. On-site, off-grid <strong>Bloom Energy fuel cells</strong> and closed-loop cooling.</td>
+            <td>Up to 300 MW</td>
+            <td><strong>Microsoft</strong>: $17.4B (up to $19.4B) through 2031. Not a public region.</td>
+            <td><strong>Live and ramping.</strong> First capacity summer 2025. All Microsoft tranches were delivered by August 2026, with the remaining capacity activating through 2026. Stop-construction orders over fuel-cell and LNG permitting were issued in August 2026, and an amended site plan was later approved. <span class="tag tag-reported">Reported</span></td>
+            <td><span class="tag tag-confirmed">Confirmed</span><br /><a class="src" href="https://nebius.com/vinelandnj" target="_blank" rel="noopener">site page</a> <a class="src" href="https://nebius.com/newsroom/nebius-accelerates-us-expansion-adding-up-to-300-mw-capacity-at-new-data-center-in-new-jersey" target="_blank" rel="noopener">newsroom</a> <a class="src" href="https://www.theregister.com/2025/09/09/microsoft_inks_near_20b_deal/" target="_blank" rel="noopener">Register</a> <a class="src" href="https://thecryptobasic.com/2026/08/18/nebius-clears-vineland-hurdle-but-its-17-4-billion-microsoft-test-is-already-underway/" target="_blank" rel="noopener">permits</a></td>
+          </tr>
+          <tr>
+            <td>Woodbury, MN<br /><span class="note">region <code>us-north1</code></span></td>
+            <td>Not disclosed. Reported as colocation. <span class="tag tag-reported">Reported</span></td>
+            <td>Not disclosed. Reported as under 100 MW. <span class="tag tag-reported">Reported</span></td>
+            <td>B300 NVLink (public region)</td>
+            <td><strong>Live.</strong> Added to the footprint in 2026 and listed as a public region. Hiring a diagnostic and RMA specialist, which points to a fleet already in service. <span class="tag tag-inferred">Inferred</span></td>
+            <td><span class="tag tag-confirmed">Confirmed</span><br /><a class="src" href="https://docs.nebius.com/overview/regions" target="_blank" rel="noopener">regions</a> <a class="src" href="https://assets.nebius.com/assets/4462517b-ce83-41f2-96ed-f2ac1bc06a05/SHLQ226%20(1).pdf-0" target="_blank" rel="noopener">Q2 letter</a></td>
+          </tr>
+          <tr>
+            <td>Oklahoma</td>
+            <td>Not disclosed. Reported as colocation, location Tulsa or Oklahoma City (unresolved). <span class="tag tag-reported">Reported</span></td>
+            <td>Not disclosed. Reported as 100 MW+. <span class="tag tag-reported">Reported</span></td>
+            <td>Not disclosed</td>
+            <td><strong>Standing up.</strong> Added in February 2026. It has the most US site roles open (6), including a <em>DC Site Manager</em>, DC technicians and a facilities engineer, which suggests go-live is near. <span class="tag tag-inferred">Inferred</span></td>
+            <td><span class="tag tag-confirmed">Confirmed</span> site exists<br /><a class="src" href="https://assets.nebius.com/assets/4462517b-ce83-41f2-96ed-f2ac1bc06a05/SHLQ226%20(1).pdf-0" target="_blank" rel="noopener">Q2 letter</a> <a class="src" href="https://www.aterio.io/events/nebius-u-s-expansion-30728" target="_blank" rel="noopener">Aterio</a> <a class="src" href="https://careers.nebius.com/?gh_jid=4994675101" target="_blank" rel="noopener">job</a></td>
+          </tr>
+          <tr>
+            <td>Independence, MO</td>
+            <td><strong>Owned</strong> AI factory, about 400 acres. Power from Independence Power &amp; Light, the city-owned utility.</td>
+            <td>Up to <strong>1.2 GW</strong></td>
+            <td>Not disclosed. Plausibly Vera Rubin, since Meta's capacity arrives in early 2027. <span class="tag tag-inferred">Inferred</span></td>
+            <td><strong>Under construction.</strong> Chapter 100 approved March 3, 2026, with $650M+ in payments in lieu of taxes over 20 years. Ground broken May 12, 2026, and expected operational in 2027. A first phase in October 2027 is <span class="tag tag-reported">Reported</span>. 1,200 construction jobs and 130 permanent.</td>
+            <td><span class="tag tag-confirmed">Confirmed</span><br /><a class="src" href="https://nebius.com/newsroom/nebius-secures-approval-for-its-first-gigawatt-scale-ai-factory" target="_blank" rel="noopener">approval</a> <a class="src" href="https://www.businesswire.com/news/home/20260512738854/en/Nebius-Breaks-Ground-on-Gigawatt-Scale-AI-Factory-in-Independence-Missouri" target="_blank" rel="noopener">groundbreaking</a> <a class="src" href="https://assets.nebius.com/assets/aa1bc2e6-df83-40cd-a6a2-95e7cda3d16c/Nebius%20SHL_Q1%202026.pdf" target="_blank" rel="noopener">Q1 letter</a></td>
+          </tr>
+          <tr>
+            <td>Schuylkill County, PA</td>
+            <td><strong>Owned</strong> AI factory. Highridge Business Park (I-81 and Gordon Mountain Rd), about 600 acres.</td>
+            <td><strong>1.2 GW</strong> at full build: 260 MW (Oct 2027), 660 MW (Jan 2029), 1,000+ MW (Nov 2029)</td>
+            <td>Not disclosed</td>
+            <td><strong>Announced</strong> May 13, 2026 (Q1 results). Phased delivery starts in 2027. Nebius is hiring a <em>Manager, US Data Center Facilities</em> and a DC deployment lead in Philadelphia. <span class="tag tag-inferred">Inferred link</span></td>
+            <td><span class="tag tag-confirmed">Confirmed</span><br /><a class="src" href="https://nebius.com/schuylkillcountypa" target="_blank" rel="noopener">site page</a> <a class="src" href="https://nebius.com/newsroom/nebius-reports-first-quarter-2026-financial-results" target="_blank" rel="noopener">Q1 release</a> <a class="src" href="https://www.datacenterdynamics.com/en/news/nebius-details-plans-for-12gw-data-center-campus-in-pennsylvania/" target="_blank" rel="noopener">DCD</a></td>
+          </tr>
+          <tr>
+            <td>Birmingham, AL<br /><span class="note">"BHM01", Oxmoor Valley</span></td>
+            <td><strong>Owned.</strong> About 80 acres bought for $90M, including the former Regions Lakeshore Operations Center. <span class="tag tag-reported">Reported</span></td>
+            <td>~300 MW (100 MW, then 200 MW) <span class="tag tag-reported">Reported</span></td>
+            <td>Not disclosed</td>
+            <td><strong>Under construction.</strong> Nebius expects it to be operational in 2027. The city ruled that the substation needs no special zoning. Neighbors have filed a lawsuit over noise. <span class="tag tag-reported">Reported</span></td>
+            <td><span class="tag tag-confirmed">Confirmed</span> owned + 2027<br /><a class="src" href="https://assets.nebius.com/assets/aa1bc2e6-df83-40cd-a6a2-95e7cda3d16c/Nebius%20SHL_Q1%202026.pdf" target="_blank" rel="noopener">Q1 letter</a> <a class="src" href="https://www.datacenterdynamics.com/en/news/nebius-targets-data-center-development-in-birmingham-alabama/" target="_blank" rel="noopener">DCD</a> <a class="src" href="https://www.wbhm.org/local-news/2026-04-25/battle-against-oxmoor-valley-data-center-fizzles-but-residents-left-with-concerns" target="_blank" rel="noopener">WBHM</a></td>
+          </tr>
+          <tr>
+            <td>Southeastern US<br /><span class="note">AIB Data Centers</span></td>
+            <td>Lease, 12-year initial term, two data halls</td>
+            <td>50 MW critical IT</td>
+            <td>Not disclosed</td>
+            <td><strong>Signed</strong> September 30, 2026. Not yet on Nebius's own map. <span class="tag tag-reported">Reported</span></td>
+            <td><span class="tag tag-reported">Reported</span><br /><a class="src" href="https://www.datacenterdynamics.com/en/news/nebius-signs-50mw-lease-with-aib-data-centers/" target="_blank" rel="noopener">DCD</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="margin-bottom:40px;">Nebius's Q1 2026 letter says its owned facilities "will deliver 3 GW of capacity across five sites". Three of those are in the US (MO, PA, AL), and Finland (310 MW) is another. MW figures are announced or planned power, not IT load in service. Nebius targets 800 MW to 1 GW of <em>connected</em> power company-wide by the end of 2026.</p>
+
+    <div class="two-col" style="margin-bottom:40px;">
+      <div class="card">
+        <h2>US hiring by site</h2>
+        <div class="prose">
+          <p>Greenhouse snapshot taken October 29, 2026: 371 open roles, 113 of them in the US. DC roles appear at a site roughly 6&ndash;12 months before it goes live. <span class="tag tag-inferred">Inferred</span></p>
+        </div>
+        <div class="table-wrap" style="margin-top:12px;">
+          <table class="scoreboard-table" style="min-width:0;">
+            <thead><tr><th>Location</th><th>Roles</th><th>Signal</th></tr></thead>
+            <tbody>
+              <tr><td>Oklahoma</td><td>6</td><td>Site manager, technician manager, technicians, facilities engineer, warehouse logistics</td></tr>
+              <tr><td>Independence / Missouri</td><td>5</td><td><a href="https://careers.nebius.com/?gh_jid=5001064101" target="_blank" rel="noopener">GM, Data Center (New Build)</a>, L3 DC infra, field hardware delivery</td></tr>
+              <tr><td>New Jersey</td><td>4</td><td>Field network technician, L3 support, facilities</td></tr>
+              <tr><td>Minnesota</td><td>3</td><td>Facilities engineer, technician, diagnostics and RMA</td></tr>
+              <tr><td>Birmingham, AL</td><td>3</td><td>DC ops manager (critical infrastructure, shared with Independence), field hardware, L3</td></tr>
+              <tr><td>Philadelphia, PA</td><td>3</td><td>Manager, US DC Facilities; DC deployment lead; technician manager</td></tr>
+              <tr><td>Kansas City, MO</td><td>2</td><td>DC IT manager, technician</td></tr>
+              <tr><td>US-wide / remote</td><td>88</td><td>Site selection, DC construction PMs, electrical and mechanical design, <a href="https://careers.nebius.com/?gh_jid=4826557101" target="_blank" rel="noopener">network</a> and SRE roles, physical security, and a US transportation security manager</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">The US network postings name <strong>Juniper, Arista, Huawei and Mellanox</strong> plus EVPN/VXLAN, BGP and IS-IS. Source: <code>corpus/careers/greenhouse.json</code>.</p>
+      </div>
+      <div class="card">
+        <h2>US go-to-market &amp; customers</h2>
+        <div class="prose">
+          <ul>
+            <li><strong>Leadership:</strong> Dan Lawrence became SVP and GM for the Americas in March 2026. He is Boston-based and came from Akamai cloud sales and AWS, and is building out US teams "as Nebius adds gigawatt-scale capacity". <span class="tag tag-confirmed">Confirmed</span> <a class="src" href="https://www.businesswire.com/news/home/20260309655149/en/" target="_blank" rel="noopener">release</a></li>
+            <li><strong>Offices:</strong> San Francisco and Dallas (since September 2024) and New York. Roles are also posted in Palo Alto and Austin, and the Eigen AI and Clarifai acquisitions added a Bay Area engineering presence. <span class="tag tag-confirmed">Confirmed</span> <a class="src" href="https://nebius.com/newsroom/nebius-expands-in-us-with-first-gpu-cluster-in-kansas-city-offices-in-san-francisco-dallas-and-new-york" target="_blank" rel="noopener">newsroom</a></li>
+            <li><strong>Hyperscalers:</strong> Microsoft (Vineland) and Meta ($12B firm plus a $15B backstop on Vera Rubin). Together they account for most of the "$40B+ of investment-grade customer commitments" that Nebius borrows against: $775M secured in July 2026 and a $3.5B Citi facility in October 2026. <span class="tag tag-confirmed">Confirmed</span> <a class="src" href="https://nebius.com/newsroom/nebius-secures-3-5-billion-financing-facility-with-citi" target="_blank" rel="noopener">Citi</a></li>
+            <li><strong>AI-native and enterprise:</strong> Reflection, Cohere, a US AI neolab, a large US quant trading firm and AMI (Yann LeCun). <span class="tag tag-confirmed">Confirmed</span> <a class="src" href="https://assets.nebius.com/assets/4462517b-ce83-41f2-96ed-f2ac1bc06a05/SHLQ226%20(1).pdf-0" target="_blank" rel="noopener">Q2 letter</a></li>
+            <li><strong>Sovereign:</strong> Palantir named Nebius its <em>preferred sovereign AI infrastructure partner</em> in September 2026, bringing Nebius compute "inside the Palantir enterprise perimeter". <span class="tag tag-confirmed">Confirmed</span> <a class="src" href="https://nebius.com/newsroom/palantir-and-nebius-partner-to-deliver-a-complete-sovereign-ai-stack-to-palantir-customers" target="_blank" rel="noopener">release</a></li>
+            <li><strong>Asset-light model (July 2026):</strong> partners build data centers to Nebius reference designs, and Nebius runs its software and handles go-to-market on them. Expect more US capacity on partner sites. <span class="tag tag-confirmed">Confirmed</span> <a class="src" href="https://nebius.com/newsroom/nebius-introduces-business-model-to-scale-ai-cloud-globally-through-infrastructure-partnerships" target="_blank" rel="noopener">release</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <p class="section-label">US timeline</p>
+    <div class="card" style="margin-bottom:40px;">
+      <ul class="prose timeline">
+        <li><span class="when">Nov 2024</span><span>First US GPU cluster (Kansas City, Patmos colo) announced. SF and Dallas offices opened, with NYC to follow.</span></li>
+        <li><span class="when">Mar 2025</span><span>Vineland, NJ build-to-suit of up to 300 MW announced. KC phase 2 agreed.</span></li>
+        <li><span class="when">Sep 2025</span><span>Microsoft contract: $17.4B, up to $19.4B, through 2031, served from Vineland.</span></li>
+        <li><span class="when">Jan 2026</span><span>Vera Rubin NVL72 to be offered in US and EU data centers from H2 2026.</span></li>
+        <li><span class="when">Feb 2026</span><span>Oklahoma and Minnesota added to the US footprint.</span></li>
+        <li><span class="when">Mar 2026</span><span>Independence 1.2 GW approved (Mar 3). Dan Lawrence named Americas GM (Mar 9). NVIDIA invests $2B (Mar 11). Meta deal of up to $27B (Mar 16).</span></li>
+        <li><span class="when">May 2026</span><span>Ground broken at Independence (May 12). Pennsylvania 1.2 GW announced (May 13). Bloom Energy fuel-cell partnership (May 20).</span></li>
+        <li><span class="when">Jul 2026</span><span>Asset-light partner model launched. First secured debt raised ($775M).</span></li>
+        <li><span class="when">Aug 2026</span><span>Q2: all Microsoft tranches delivered, 2026 contracted-power target raised to 5 GW, and >1 GW/yr of deployments planned from 2027.</span></li>
+        <li><span class="when">Sep 2026</span><span>Palantir sovereign AI partnership. 50 MW AIB lease in the southeastern US.</span></li>
+        <li><span class="when">Oct 2026</span><span>$3.5B senior secured facility from Citi.</span></li>
+        <li><span class="when">2027</span><span>Independence, Birmingham and Pennsylvania (260 MW) come online, and Meta's Vera Rubin capacity is delivered.</span></li>
+      </ul>
+    </div>
+
+    <p class="section-label" id="panw">What it means for PANW <span class="tag tag-inferred">Inferred</span></p>
+    <div class="card" style="margin-bottom:40px;">
+      <div class="prose">
+        <ul>
+          <li><strong>Owned sites change who buys.</strong> At Kansas City, Minnesota and Oklahoma, Nebius is a tenant, and the landlord owns the building, BMS and physical plant. At Independence, Pennsylvania and Birmingham, Nebius owns the whole stack. That means a new perimeter, management network, OOB network and OT/BMS network at each site, with designs for 2027 go-lives being locked in during late 2026 and H1 2027.</li>
+          <li><strong>PANW is already a known quantity.</strong> Nebius's current <a href="https://careers.nebius.com/?gh_jid=4971845101" target="_blank" rel="noopener">Network Security Engineer</a> posting asks for "Palo Alto Networks, Check Point, or similar" NGFWs, User-ID, Entra ID and Okta integration, ZTNA/SASE, and "<strong>Panorama, Strata Cloud Manager</strong>, and FortiManager". It also covers "large hyper scale DC security solutions: IPS/NDR, AntiDDoS". The estate is mixed, but Palo Alto is named first. Ask who owns the DC edge standard.</li>
+          <li><strong>Hyperscaler tenants raise the bar.</strong> Microsoft and Meta capacity is dedicated, so expect customer-driven requirements for isolation, logging and attestation at the edge of each dedicated block. A per-tenant HA pair, as in the Lambda Private Cloud model, maps cleanly onto this. See <a href="positioning.html">Firewall Positioning</a>.</li>
+          <li><strong>Power is OT.</strong> Vineland runs on-site Bloom fuel cells, Nebius signed a company-wide Bloom deal in May 2026, and Independence is tied to a municipal utility. Fuel cells, switchgear and BMS form an OT attack surface. Position OT security and segmentation alongside the data center firewalls.</li>
+          <li><strong>Sovereign and regulated demand:</strong> Palantir's "inside the perimeter" partnership and the US quant trading firm both bring compliance-driven buyers for whom Nebius's security story becomes part of the sale.</li>
+          <li><strong>Who to find:</strong> the Americas GM's org (Dan Lawrence), the network infrastructure engineering manager for the US (open role), the US data center facilities manager (Philadelphia), and the security architecture team, which is hiring in Tel Aviv and Europe.</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Internal — Palo Alto Networks account research. Not for customer distribution.
+  </footer>
+</body>
+</html>

@@ -6,7 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Internal PANW account research for **Nebius** (NASDAQ: NBIS, full-stack AI cloud), used by a sales engineer for technical enablement and firewall positioning. It has the same structure as `~/lambda` (the Lambda AI account), plus a **US Strategy** page covering Nebius's US data center build-out and US hiring.
 
-**Not published.** The repo is local git only, with no remote. `.github/workflows/pages.yml` (copied from `~/lambda`) would publish `site/` to GitHub Pages if the repo is ever pushed. Pushing would make the positioning and `corpus/` public, so ask before adding a remote.
+**Deployed publicly:** pushed to the public repo `github.com/mvu-panw/nebius_research` (branch `main`). `.github/workflows/pages.yml` runs two jobs. `check` fails on a broken internal `href`/`src`, or on any non-web file in `site/` (a guard against CSV/JSON/PDF exports leaking). `deploy` publishes only `site/` to GitHub Pages on every push to `main`. Pull requests run `check` only. The repo itself, including `corpus/` and this file, is public too, so the positioning is visible to anyone. One-time manual step: Settings → Pages → Source = "GitHub Actions".
+
+**Never commit internal PANW CRM data.** `Nebius_Inventory_*.csv` (install-base exports) is gitignored. Keep any such data out of `site/` and `corpus/`.
 
 ## Layout
 

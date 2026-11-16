@@ -8,6 +8,7 @@ Usage:
 import csv
 import html
 import json
+import os
 import re
 import subprocess
 import sys
@@ -19,7 +20,8 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent.parent / "corpus"
-UA = "Mozilla/5.0 (PANW-SE account research; contact mikeovu@gmail.com)"
+# Optional contact comes from the environment so it never lands in this public repo
+UA = "Mozilla/5.0 (account research crawler" + (f"; contact {os.environ['CRAWL_CONTACT']}" if os.environ.get("CRAWL_CONTACT") else "") + ")"
 DELAY = {"nebius.com": 3.0, "docs": 1.0, "careers": 1.0}  # seconds between requests, per host
 # docs first: nebius.com rate-limits hard and may need a later rerun
 SITEMAPS = {

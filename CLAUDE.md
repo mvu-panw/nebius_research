@@ -18,7 +18,7 @@ Internal PANW account research for **Nebius** (NASDAQ: NBIS, full-stack AI cloud
 | `corpus/{docs,blog,newsroom,site}/*.md` | Plain-text crawl of docs.nebius.com and nebius.com from sitemaps. Grep this before searching the web. |
 | `corpus/careers/greenhouse.json` | Snapshot of the Greenhouse job board: all jobs, plus full text for US infra/DC/network/security roles |
 | `corpus/careers/*.md` | Full text of key security postings. `network-security-engineer-*.md` is the incumbent-vendor evidence. |
-| `corpus/ir/` | Q1 and Q2 2026 shareholder letters (PDF plus `pdftotext -layout` output). These are the primary source for site counts and power targets. |
+| `corpus/ir/` | Q1–Q3 2026 shareholder letters (PDF plus `pdftotext -layout` output). These are the primary source for site counts and power targets. |
 | `corpus/sources.csv` | url, title, local file and fetched_at for every crawled page |
 | `tools/crawl.py` | Stdlib-only crawler (respects robots.txt, per-host delays) |
 
@@ -26,7 +26,12 @@ Internal PANW account research for **Nebius** (NASDAQ: NBIS, full-stack AI cloud
 
 ```bash
 python3 -m http.server 8500 --directory site     # preview the site
+
+# Run the same checks as CI's `check` job before pushing (there is no other test suite or linter)
+(cd site && for r in $(grep -ohE '(href|src)="[^"]+"' *.html | sed -E 's/^(href|src)="//; s/"$//' | grep -vE '^(https?:|mailto:|#)' | sed -E 's/[?#].*$//' | sort -u); do [ -e "$r" ] || echo "broken: $r"; done)
+find site -type f ! -name '*.html' ! -name '*.css' ! -name '*.png' ! -name '*.svg' ! -name '*.jpg' ! -name '*.ico' ! -name .DS_Store
 python3 -I tools/crawl.py --careers               # refresh corpus + job board (skips files that already exist; delete a file to refetch it)
+# The crawler sends a generic User-Agent. To add a contact, set CRAWL_CONTACT in your shell; never hard-code it (this repo is public).
 pdftotext -layout corpus/ir/<letter>.pdf corpus/ir/<letter>.txt   # after adding a new shareholder letter
 ```
 
@@ -43,9 +48,9 @@ Crawler notes:
 - **Every factual claim carries a source link and a confidence tag**: `tag-confirmed` (a Nebius-owned page, doc or shareholder letter), `tag-reported` (third-party), `tag-inferred` (our reasoning). PANW performance numbers are the same reseller-mirror datasheet figures used on the Lambda site, flagged as needing confirmation.
 - The architecture diagram is inline SVG in `architecture.html`, with hard-coded hex colors that match the CSS tokens.
 
-## Key account facts (verified in corpus, Oct 29, 2026)
+## Key account facts (verified in corpus, Nov 16, 2026)
 
-- **US sites (7 on Nebius's Q2 2026 map plus 1 lease):** Kansas City (Patmos colo, `us-central1`) and Woodbury MN (`us-north1`, B300) are live public regions. Vineland NJ is a DataOne build-to-suit serving Microsoft, with Bloom fuel cells. Independence MO (1.2 GW) and Schuylkill County PA (1.2 GW; 260 MW Oct 2027 → 1 GW+ Nov 2029) are owned. Birmingham AL is owned (~300 MW reported). Oklahoma's partner and MW are undisclosed. An AIB 50 MW southeastern lease was reported in September 2026. Independence, AL and PA are expected online in 2027 (`corpus/ir/shareholder-letter-q1-2026.txt`, `corpus/site/nebius.com__schuylkillcountypa.md`, `docs.nebius.com__overview__regions.md`).
+- **US sites (8, per the Q3 2026 letter):** Kansas City (Patmos colo, `us-central1`) and Woodbury MN (`us-north1`, B300) are live public regions. Vineland NJ is a DataOne build-to-suit serving Microsoft. Bloom fuel cells are now its main power, and the remaining Microsoft tranches slipped to Q2 2027. Independence MO (up to 1.2 GW; 1.1 GW under contract after Q3) and Schuylkill County PA (1.2 GW; 260 MW Oct 2027 → 1 GW+ Nov 2029) are owned. Birmingham AL is owned (~300 MW reported). Oklahoma's partner and MW are undisclosed. South Carolina (50 MW colo, 2027) is the "eighth US site", probably the AIB lease reported in September 2026. The Q3 letter lists Missouri and Alabama (not PA) as owned sites deploying in 2027 (`corpus/ir/shareholder-letter-q3-2026.txt`, `corpus/site/nebius.com__schuylkillcountypa.md`, `docs.nebius.com__overview__regions.md`).
 - **Incumbent signal:** a Network Security Engineer posting names "Palo Alto Networks, Check Point" and asks for Panorama, Strata Cloud Manager and FortiManager (`corpus/careers/network-security-engineer-4971845101.md`). The estate is mixed. Network gear in postings: Juniper, Arista, Huawei, Mellanox.
 - **Post-mortem:** the us-central1 outage on Sep 3, 2025 was triggered by "new Firewall nodes onboarding" between Nebius's Backbone and DC routing domains (`corpus/blog/nebius.com__blog__posts__incident-post-mortem-analysis-us-central1-service-disruption.md`). Lead every proposal with the insertion design.
 - **Tenant network security** is L3/L4 security groups only (GA Feb 2026, 60 rules/group) plus an open-source VM-based IPsec VPN gateway (March 2026). Custom route tables allow appliance or NAT insertion, but traffic within a network can't be steered (`docs.nebius.com__vpc__*`).
